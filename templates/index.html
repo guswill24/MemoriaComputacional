@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prueba de Rendimiento de Memoria</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">⚡</div>
+        <h1>Prueba de Rendimiento de Memoria</h1>
+      </div>
+      <div class="toolbar">
+        <span class="status"><span id="statusDot" class="dot warn"></span><span id="statusLabel">Listo</span></span>
+        <button id="startBtn" class="btn primary" onclick="start()">
+          <span id="startIcon">▶</span>
+          <span id="startSpin" class="spinner" style="display:none"></span>
+          Iniciar
+        </button>
+        <button id="stopBtn" class="btn" onclick="stop()">⏹ Detener</button>
+        <button class="btn" onclick="copyLog()">📋 Copiar</button>
+        <button class="btn" onclick="downloadLog()">💾 Descargar</button>
+        <button id="flushBtn" class="btn" onclick="dropAndRestart()">🧹 Limpiar caché y repetir</button>
+      <input id="adminToken" class="btn" placeholder="PIN controlador (ej. raspi)" style="min-width: 200px;" oninput="localStorage.setItem('adminToken', this.value)" />
+        <label class="switch"><input id="autoScroll" type="checkbox" checked /> Autoscroll</label>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="metric-label">Tiempo desde disco</div>
+        <div id="diskTime" class="metric-value">—</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Tiempo desde RAM</div>
+        <div id="ramTime" class="metric-value">—</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Aceleración (RAM vs disco)</div>
+        <div id="speedup" class="metric-value">—</div>
+      </div>
+    </div>
+
+    <div class="card chart-card">
+      <div class="chart-title">Comparativa de tiempos (segundos)</div>
+      <canvas id="chart"></canvas>
+    </div>
+
+    <div id="console" class="console"></div>
+    <div class="footer">SSE en vivo · Raspberry Pi / Linux recomendado para limpieza de caché</div>
+
+    <hr style="border-color: rgba(255,255,255,0.08); margin: 24px 0;" />
+    <div class="header">
+      <div class="brand">
+        <div class="logo">📊</div>
+        <h1>Benchmark de Patrones de Acceso</h1>
+      </div>
+    </div>
+    <div class="toolbar" style="margin-bottom: 12px;">
+      <input id="bmFile" placeholder="archivo_grande.txt" class="btn" style="min-width: 220px;" />
+      <select id="bmPattern" class="btn">
+        <option value="sequential">sequential</option>
+        <option value="random">random</option>
+        <option value="stride">stride</option>
+        <option value="hotset">hotset</option>
+      </select>
+      <input id="bmBlock" class="btn" type="number" value="65536" min="512" step="512" title="Tamaño bloque (bytes)" />
+      <input id="bmStride" class="btn" type="number" value="65536" min="0" step="512" title="Stride (bytes)" />
+      <input id="bmHot" class="btn" type="number" value="10" min="1" max="100" step="1" title="Hot set %" />
+      <input id="bmPasses" class="btn" type="number" value="1" min="1" max="10" step="1" title="Pasadas" />
+      <button id="bmStart" class="btn primary" onclick="startBenchmark()">▶ Ejecutar benchmark</button>
+      <button id="bmStop" class="btn" onclick="stopBenchmark()">⏹ Detener</button>
+    </div>
+    <div id="bmConsole" class="console"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+
