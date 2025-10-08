@@ -8,6 +8,11 @@ html, body { height: 100%; }
 body { margin: 0; background: linear-gradient(180deg, #0b1220, #0f172a 25%); color: var(--text);
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; -webkit-font-smoothing: antialiased; }
 .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px 40px; }
+.tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.tab { background: rgba(255,255,255,0.04); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; cursor: pointer; font-weight: 700; }
+.tab.active { background: linear-gradient(180deg, #0ea5e9, #0284c7); border-color: transparent; color: white; }
+.view { display: none; }
+.view.active { display: block; }
 .header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
 .brand { display: flex; align-items: center; gap: 12px; }
 .logo { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
@@ -37,6 +42,7 @@ body { margin: 0; background: linear-gradient(180deg, #0b1220, #0f172a 25%); col
 .chart-card { margin-top: 14px; }
 .chart-title { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
 #chart { width: 100%; height: 180px; display: block; }
+#bmChart { width: 100%; height: 160px; display: block; }
 .line { padding: 6px 8px; border-left: 3px solid transparent; white-space: pre-wrap; word-break: break-word; }
 .line.section { color: var(--accent); border-color: var(--accent); background: rgba(34,211,238,0.06); font-weight: 700; }
 .line.ok { color: #c7f9cc; border-color: var(--success); background: rgba(34,197,94,0.06); }
